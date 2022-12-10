@@ -1,0 +1,60 @@
+@media (max-width: 1024px) {
+  h1,
+  h2 {
+    font-size: 3rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  h4 {
+    font-size: 1rem;
+  }
+
+  li,
+  a {
+    font-size: 0.9rem;
+  }
+
+  p {
+    font-size: 1.2rem;
+  }
+
+  /* HEADER */
+
+  .nav-links {
+    padding: 1rem;
+  }
+
+  #CONTAINER-ARTICLE {
+    margin: 2rem;
+  }
+
+  .section-wrapper {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 2rem;
+    margin: 2rem 0;
+  }
+
+  .socials-list {
+    width: 80vw;
+
+  }
+
+  #gov-images {
+    height: auto;
+    min-width: 100%;
+  }
+
+  footer {
+    padding: 2rem 10rem;
+    height: auto;
+  }
+
+  .img-wrapper {
+    width: 100%;
+  }
+}
