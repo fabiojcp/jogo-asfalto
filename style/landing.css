@@ -100,7 +100,7 @@ nav {
   width: 100%;
 
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
   flex-wrap: wrap;
 }
@@ -145,7 +145,7 @@ nav {
   margin: 10vh 0 0 0;
 }
 
-#JOGUEASFALTO :first-child {
+#JOGUEASFALTO > h2 {
   text-shadow: 0 0 20px #b04886, 0 0 20px #ca057c;
 }
 
