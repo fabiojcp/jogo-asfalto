@@ -44,12 +44,12 @@
     <header>
       <nav>
         <ul class="nav_link-container">
-          <li><a href="#OJOGO" class="nav-links"> O jogo </a></li>
-          <li><a href="#JOGUEASFALTO" class="nav-links"> Jogue asfalto </a></li>
-          <li><a href="#SOBRE" class="nav-links"> Sobre Marlene </a></li>
-          <li><a href="#TRAILER" class="nav-links"> Trailer </a></li>
-          <li><a href="#EQUIPE" class="nav-links"> Equipe </a></li>
-          <li><a href="#CONTATO" class="nav-links"> Contatos</a></li>
+          <li><a href="#OJOGO" class="nav-links">O jogo</a></li>
+          <li><a href="#JOGUEASFALTO" class="nav-links">Jogue asfalto</a></li>
+          <li><a href="#SOBRE" class="nav-links">Sobre Marlene</a></li>
+          <li><a href="#TRAILER" class="nav-links">Trailer</a></li>
+          <li><a href="#EQUIPE" class="nav-links">Equipe</a></li>
+          <li><a href="#CONTATO" class="nav-links">Contatos</a></li>
         </ul>
       </nav>
     </header>
@@ -69,8 +69,33 @@
             <a
               href="https://drive.google.com/drive/folders/1W6JEuk4euR0u0bSSIetqGZmctuwg3-Zn"
               target="_blank"
-              >Download aqui</a
             >
+              Download aqui
+            </a>
+          </li>
+
+          <li>
+            <p>Jogue online:</p>
+            <div id="unity-container" class="unity-desktop">
+              <canvas
+                id="unity-canvas"
+                width="960"
+                height="600"
+                tabindex="-1"
+              ></canvas>
+              <div id="unity-loading-bar">
+                <div id="unity-logo"></div>
+                <div id="unity-progress-bar-empty">
+                  <div id="unity-progress-bar-full"></div>
+                </div>
+              </div>
+              <div id="unity-warning"></div>
+              <div id="unity-footer">
+                <div id="unity-webgl-logo"></div>
+                <div id="unity-fullscreen-button"></div>
+                <div id="unity-build-title">Asfalto</div>
+              </div>
+            </div>
           </li>
         </ul>
       </section>
@@ -267,7 +292,7 @@
               <li>Mari Romano</li>
               <li>Felipe Melo</li>
               <li>Karine Rodrigues</li>
-              <li>Elisangela Psicopedagoga</li>
+              <li>Elisângela Psicopedagoga</li>
             </ul>
           </div>
 
@@ -321,7 +346,7 @@
                 </ul>
                 <h4>Produção:</h4>
                 <ul class="list-wrapper">
-                  <li>Silvana Mchado</li>
+                  <li>Silvana Machado</li>
                   <li>Manjericona</li>
                 </ul>
                 <li>Todos os direitos reservados</li>
@@ -350,32 +375,34 @@
           <h4>Acompanhe nas nossas redes!</h4>
           <ul class="socials-list">
             <li>
-              <a href="https://www.instagram.com/jogueasfalto/" target="_blank"
-                ><img
+              <a href="https://www.instagram.com/jogueasfalto/" target="_blank">
+                <img
                   class="icon instagram-icon"
                   src="./assets/images/social-media/instagram.ico"
                   alt="logo instagram"
-                />Instragram</a
-              >
+                />
+                Instragram
+              </a>
             </li>
             <li>
-              <a href="https://twitter.com/jogueasfalto" target="_blank"
-                ><img
+              <a href="https://twitter.com/jogueasfalto" target="_blank">
+                <img
                   class="icon twitter-icon"
                   src="./assets/images/social-media/twitter.ico"
                   alt="logo twitter"
                 />
-                Twitter</a
-              >
+                Twitter
+              </a>
             </li>
             <li>
-              <a href="https://facebook.com/jogueasfalto/" target="_blank"
-                ><img
+              <a href="https://facebook.com/jogueasfalto/" target="_blank">
+                <img
                   class="icon facebook-icon"
                   src="./assets/images/social-media/facebook.ico"
                   alt="logo facebook"
-                />Facebook</a
-              >
+                />
+                Facebook
+              </a>
             </li>
           </ul>
         </div>
@@ -394,5 +421,102 @@
       </div>
     </footer>
     <!--changed to youtube iframe <script src="./scripts/main.js"></script> -->
+    <script>
+      var container = document.querySelector("#unity-container");
+      var canvas = document.querySelector("#unity-canvas");
+      var loadingBar = document.querySelector("#unity-loading-bar");
+      var progressBarFull = document.querySelector("#unity-progress-bar-full");
+      var fullscreenButton = document.querySelector("#unity-fullscreen-button");
+      var warningBanner = document.querySelector("#unity-warning");
+
+      // Shows a temporary message banner/ribbon for a few seconds, or
+      // a permanent error message on top of the canvas if type=='error'.
+      // If type=='warning', a yellow highlight color is used.
+      // Modify or remove this function to customize the visually presented
+      // way that non-critical warnings and error messages are presented to the
+      // user.
+      function unityShowBanner(msg, type) {
+        function updateBannerVisibility() {
+          warningBanner.style.display = warningBanner.children.length
+            ? "block"
+            : "none";
+        }
+        var div = document.createElement("div");
+        div.innerHTML = msg;
+        warningBanner.appendChild(div);
+        if (type == "error") div.style = "background: red; padding: 10px;";
+        else {
+          if (type == "warning")
+            div.style = "background: yellow; padding: 10px;";
+          setTimeout(function () {
+            warningBanner.removeChild(div);
+            updateBannerVisibility();
+          }, 5000);
+        }
+        updateBannerVisibility();
+      }
+
+      var buildUrl = "./Build";
+      var loaderUrl = buildUrl + "/Asfalto-1.0.2-WebGl.loader.js";
+      var config = {
+        dataUrl: buildUrl + "/Asfalto-1.0.2-WebGl.data",
+        frameworkUrl: buildUrl + "/Asfalto-1.0.2-WebGl.framework.js",
+        codeUrl: buildUrl + "/Asfalto-1.0.2-WebGl.wasm",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "Sylvana Machado",
+        productName: "Asfalto",
+        productVersion: "1.0.2",
+        showBanner: unityShowBanner,
+      };
+
+      // By default, Unity keeps WebGL canvas render target size matched with
+      // the DOM size of the canvas element (scaled by window.devicePixelRatio)
+      // Set this to false if you want to decouple this synchronization from
+      // happening inside the engine, and you would instead like to size up
+      // the canvas DOM size and WebGL render target sizes yourself.
+      // config.matchWebGLToCanvasSize = false;
+
+      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        // Mobile device style: fill the whole browser client area with the game canvas:
+
+        var meta = document.createElement("meta");
+        meta.name = "viewport";
+        meta.content =
+          "width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes";
+        document.getElementsByTagName("head")[0].appendChild(meta);
+        container.className = "unity-mobile";
+        canvas.className = "unity-mobile";
+
+        // To lower canvas resolution on mobile devices to gain some
+        // performance, uncomment the following line:
+        // config.devicePixelRatio = 1;
+      } else {
+        // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
+
+        canvas.style.width = "960px";
+        canvas.style.height = "600px";
+      }
+
+      loadingBar.style.display = "block";
+
+      var script = document.createElement("script");
+      script.src = loaderUrl;
+      script.onload = () => {
+        createUnityInstance(canvas, config, (progress) => {
+          progressBarFull.style.width = 100 * progress + "%";
+        })
+          .then((unityInstance) => {
+            loadingBar.style.display = "none";
+            fullscreenButton.onclick = () => {
+              unityInstance.SetFullscreen(1);
+            };
+          })
+          .catch((message) => {
+            alert(message);
+          });
+      };
+
+      document.body.appendChild(script);
+    </script>
   </body>
 </html>
