@@ -50,6 +50,7 @@
           <li><a href="#TRAILER" class="nav-links">Trailer</a></li>
           <li><a href="#EQUIPE" class="nav-links">Equipe</a></li>
           <li><a href="#CONTATO" class="nav-links">Contatos</a></li>
+          <li><a href="#PARCEIROS" class="nav-links">Parceiros</a></li>
         </ul>
       </nav>
     </header>
@@ -64,38 +65,13 @@
       </section>
       <section id="JOGUEASFALTO">
         <h2>Jogue asfalto!</h2>
-        <ul id="GAMEVERSIONS">
-          <li>
-            <a
-              href="https://drive.google.com/drive/folders/1W6JEuk4euR0u0bSSIetqGZmctuwg3-Zn"
-              target="_blank"
-            >
-              Download aqui
-            </a>
+        <ul id="GAMEVERSIONS" class="downloadWrapper">
+          <li class="downloadButton">
+            <a href="/download/">Download aqui</a>
           </li>
 
-          <li>
-            <p>Jogue online:</p>
-            <div id="unity-container" class="unity-desktop">
-              <canvas
-                id="unity-canvas"
-                width="960"
-                height="600"
-                tabindex="-1"
-              ></canvas>
-              <div id="unity-loading-bar">
-                <div id="unity-logo"></div>
-                <div id="unity-progress-bar-empty">
-                  <div id="unity-progress-bar-full"></div>
-                </div>
-              </div>
-              <div id="unity-warning"></div>
-              <div id="unity-footer">
-                <div id="unity-webgl-logo"></div>
-                <div id="unity-fullscreen-button"></div>
-                <div id="unity-build-title">Asfalto</div>
-              </div>
-            </div>
+          <li class="downloadButton">
+            <a href="/jogo/">Jogue online</a>
           </li>
         </ul>
       </section>
@@ -369,44 +345,66 @@
 
           <hr />
         </div>
-      </section>
-      <div class="container-divider">
-        <div class="socials-wrapper">
-          <h4>Acompanhe nas nossas redes!</h4>
-          <ul class="socials-list">
-            <li>
-              <a href="https://www.instagram.com/jogueasfalto/" target="_blank">
-                <img
-                  class="icon instagram-icon"
-                  src="./assets/images/social-media/instagram.ico"
-                  alt="logo instagram"
-                />
-                Instragram
-              </a>
-            </li>
-            <li>
-              <a href="https://twitter.com/jogueasfalto" target="_blank">
-                <img
-                  class="icon twitter-icon"
-                  src="./assets/images/social-media/twitter.ico"
-                  alt="logo twitter"
-                />
-                Twitter
-              </a>
-            </li>
-            <li>
-              <a href="https://facebook.com/jogueasfalto/" target="_blank">
-                <img
-                  class="icon facebook-icon"
-                  src="./assets/images/social-media/facebook.ico"
-                  alt="logo facebook"
-                />
-                Facebook
-              </a>
-            </li>
-          </ul>
+        <div class="container-divider" id="CONTATO">
+          <div class="socials-wrapper">
+            <h4>Acompanhe nas nossas redes!</h4>
+            <ul class="socials-list">
+              <li>
+                <a
+                  href="https://www.instagram.com/jogueasfalto/"
+                  target="_blank"
+                >
+                  <img
+                    class="icon instagram-icon"
+                    src="./assets/images/social-media/instagram.ico"
+                    alt="logo instagram"
+                  />
+                  Instragram
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/jogueasfalto" target="_blank">
+                  <img
+                    class="icon twitter-icon"
+                    src="./assets/images/social-media/twitter.ico"
+                    alt="logo twitter"
+                  />
+                  Twitter
+                </a>
+              </li>
+              <li>
+                <a href="https://facebook.com/jogueasfalto/" target="_blank">
+                  <img
+                    class="icon facebook-icon"
+                    src="./assets/images/social-media/facebook.ico"
+                    alt="logo facebook"
+                  />
+                  Facebook
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
+
+        <hr />
+
+        <div id="PARCEIROS" class="container-divider">
+          <div class="credits-wrapper">
+            <h3>Parceiros</h3>
+            <ul class="list-wrapper">
+              <li>
+                <a
+                  href="https://eternal-legend.com.br/"
+                  target="_blank"
+                  aria-label="Link para site Eternal Legends, site parceiro do asfalto"
+                >
+                  <p>Eternal Legend</p>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
     </main>
 
     <footer>
@@ -420,120 +418,5 @@
         </div>
       </div>
     </footer>
-    <!--changed to youtube iframe <script src="./scripts/main.js"></script> -->
-    <script>
-      const downloadDataUrl = async () => {
-        const url =
-          "https://pub-d74090d6c2594ec9961da2f6973e5851.r2.dev/Asfalto-1.0.2-WebGl.data";
-        const response = await fetch(url, {
-          method: "GET",
-          cache: "no-cache",
-        });
-        if (!response.ok) {
-          throw new Error(`Failed to download ${url}`);
-        }
-        console.log("Data URL downloaded successfully");
-        console.log(response);
-        const blob = await response.blob();
-        console.log(blob);
-        const objectUrl = URL.createObjectURL(blob);
-        console.log(objectUrl);
-        return objectUrl;
-      };
-
-      const setupUnity = (loader) => {
-        var container = document.querySelector("#unity-container");
-        var canvas = document.querySelector("#unity-canvas");
-        var loadingBar = document.querySelector("#unity-loading-bar");
-        var progressBarFull = document.querySelector(
-          "#unity-progress-bar-full"
-        );
-        var fullscreenButton = document.querySelector(
-          "#unity-fullscreen-button"
-        );
-        var warningBanner = document.querySelector("#unity-warning");
-
-        function unityShowBanner(msg, type) {
-          function updateBannerVisibility() {
-            warningBanner.style.display = warningBanner.children.length
-              ? "block"
-              : "none";
-          }
-          var div = document.createElement("div");
-          div.innerHTML = msg;
-          warningBanner.appendChild(div);
-          if (type === "error") div.style = "background: red; padding: 10px;";
-          else {
-            if (type === "warning")
-              div.style = "background: yellow; padding: 10px;";
-            setTimeout(() => {
-              warningBanner.removeChild(div);
-              updateBannerVisibility();
-            }, 5000);
-          }
-          updateBannerVisibility();
-        }
-
-        var buildUrl = "./Build"; // URL base
-        var loaderUrl = buildUrl + "/Asfalto-1.0.2-WebGl.loader.js";
-
-        var config = {
-          dataUrl: loader,
-          frameworkUrl: buildUrl + "/Asfalto-1.0.2-WebGl.framework.js",
-          codeUrl: buildUrl + "/Asfalto-1.0.2-WebGl.wasm",
-          streamingAssetsUrl: "StreamingAssets",
-          companyName: "Sylvana Machado",
-          productName: "Asfalto",
-          productVersion: "1.0.2",
-          showBanner: unityShowBanner,
-        };
-
-        if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-          var meta = document.createElement("meta");
-          meta.name = "viewport";
-          meta.content =
-            "width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes";
-          document.getElementsByTagName("head")[0].appendChild(meta);
-          container.className = "unity-mobile";
-          canvas.className = "unity-mobile";
-        } else {
-          canvas.style.width = "960px";
-          canvas.style.height = "600px";
-        }
-
-        loadingBar.style.display = "block";
-
-        var script = document.createElement("script");
-        script.src = loaderUrl;
-        script.onload = () => {
-          createUnityInstance(canvas, config, (progress) => {
-            progressBarFull.style.width = 100 * progress + "%";
-          })
-            .then((unityInstance) => {
-              loadingBar.style.display = "none";
-              fullscreenButton.onclick = () => {
-                unityInstance.SetFullscreen(1);
-              };
-            })
-            .catch((message) => {
-              alert(message);
-            });
-        };
-
-        document.body.appendChild(script);
-      };
-
-      const initializeUnity = async () => {
-        try {
-          console.log("Downloading dataUrl...");
-          const loader = await downloadDataUrl();
-          console.log("DataUrl downloaded successfully");
-          setupUnity(loader);
-        } catch (error) {
-          console.error("Error downloading dataUrl:", error);
-        }
-      };
-      initializeUnity();
-    </script>
   </body>
 </html>
